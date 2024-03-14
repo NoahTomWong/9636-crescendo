@@ -39,6 +39,9 @@ public class RobotContainer {
   // The driver's controller
   PS4Controller m_driverController = new PS4Controller(OIConstants.kDriverControllerPort);
 
+  // The 
+  PS4Controller m_operatorController = new PS4Controller(OIConstants.kOperatorControllerPort);
+
   /**
    * The container for the robot. Contains subsystems, OI devices, and commands.
    */
@@ -74,6 +77,12 @@ public class RobotContainer {
             () -> m_robotDrive.setX(),
             m_robotDrive));
   }
+  
+    m_operatorController.btn_RightBumper
+        .whileTrue(new RunCommand(m_robotIntakeIn));
+        
+    m_operatorController.btn_LeftBumper
+        .whileTrue(new RunCommand(m_robotIntakeOut));
 
   /**
    * Use this to pass the autonomous command to the main {@link Robot} class.
