@@ -24,6 +24,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.SwerveControllerCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import edu.wpi.first.wpilibj2.command.button.PS4Controller;
 import java.util.List;
 
 /*
@@ -76,13 +77,15 @@ public class RobotContainer {
         .whileTrue(new RunCommand(
             () -> m_robotDrive.setX(),
             m_robotDrive));
+
+    new JoystickButton(m_operatorController, m_operatorController.getR1ButtonPressed())
+        .whileTrue(new RunCommand(m_robotIntakeIn));
+            
+    new m_operatorController.btn_LeftBumper
+        .whileTrue(new RunCommand(m_robotIntakeOut));
   }
   
-    m_operatorController.btn_RightBumper
-        .whileTrue(new RunCommand(m_robotIntakeIn));
-        
-    m_operatorController.btn_LeftBumper
-        .whileTrue(new RunCommand(m_robotIntakeOut));
+    
 
   /**
    * Use this to pass the autonomous command to the main {@link Robot} class.

@@ -142,6 +142,6 @@ public final class Constants {
   }
 
   // Mechanism CAN IDS
-  public static final int intakeMotorCanId = 10
+  public static final int intakeMotorCanId = 10;
   
 }
