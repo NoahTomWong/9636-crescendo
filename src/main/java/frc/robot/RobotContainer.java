@@ -24,8 +24,10 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.SwerveControllerCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-import edu.wpi.first.wpilibj2.command.button.PS4Controller;
+import edu.wpi.first.wpilibj2.command.button.CommandPS4Controller;
 import java.util.List;
+
+import frc.robot.subsystems.Intake;
 
 /*
  * This class is where the bulk of the robot should be declared.  Since Command-based is a
@@ -41,7 +43,7 @@ public class RobotContainer {
   PS4Controller m_driverController = new PS4Controller(OIConstants.kDriverControllerPort);
 
   // The 
-  PS4Controller m_operatorController = new PS4Controller(OIConstants.kOperatorControllerPort);
+  private final CommandPS4Controller m_operatorController = new CommandPS4Controller(OIConstants.kOperatorControllerPort);
 
   /**
    * The container for the robot. Contains subsystems, OI devices, and commands.
@@ -78,13 +80,12 @@ public class RobotContainer {
             () -> m_robotDrive.setX(),
             m_robotDrive));
 
-    new JoystickButton(m_operatorController, m_operatorController.getR1ButtonPressed())
-        .whileTrue(new RunCommand(m_robotIntakeIn));
+    m_operatorController.L1().whileTrue(m_robotIntakeIn)
+        .onFalse(m_robotIntakeStop);
             
-    new m_operatorController.btn_LeftBumper
-        .whileTrue(new RunCommand(m_robotIntakeOut));
+    m_operatorController.R1().whileTrue(m_robotIntakeOut)
+        .onFalse(m_robotIntakeStop);
   }
-  
     
 
   /**

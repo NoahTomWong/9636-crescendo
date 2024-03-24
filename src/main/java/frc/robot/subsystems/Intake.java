@@ -1,29 +1,28 @@
-import edu.wpi.first.wpilibj.motorcontrol.MotorController;
-import edu.wpi.first.wpilibj.PS4Controller;
-import edu.wpi.first.wpilibj.GenericHID;
-import java.lang.Object;
+package frc.robot.subsystems;
+
+import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import java.lang.AutoCloseable;
+import edu.wpi.first.wpilibj.motorcontrol.MotorController;
 import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 
 public class Intake extends SubsystemBase {
 
-    private final CANSparkMax m_intakeMotor = new CANSparkMax(10, CANSparkLowLevel.kBrushless);
+    private final CANSparkMax m_intakeMotor = new CANSparkMax(10, MotorType.kBrushless);
 
 
-    public void setMotorSpeed(double speed) {
-            m_intakeMotor.set(speed);
+
+    public void m_robotIntake(double speed) {
+        m_intakeMotor.set(speed);
     }
         
-        
-    public void m_robotIntakeIn() {
-            setMotorSpeed(0.5);
+    public void m_robotIntakeOut(double speed) {
+        m_intakeMotor.set(speed);
+    }      
+
+    public void m_robotIntakeStop() {
+        m_intakeMotor.set(0);
     }
-
-
-    public void m_robotIntakeOut() {
-            setMotorSpeed(-0.5);
-        
-    }        
 }
