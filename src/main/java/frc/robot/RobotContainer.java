@@ -19,15 +19,24 @@ import edu.wpi.first.wpilibj.PS4Controller.Button;
 import frc.robot.Constants.AutoConstants;
 import frc.robot.Constants.DriveConstants;
 import frc.robot.Constants.OIConstants;
+import frc.robot.commands.IntakeIn;
 import frc.robot.subsystems.DriveSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.SwerveControllerCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.CommandPS4Controller;
+import edu.wpi.first.wpilibj2.command.CommandBase;
+import edu.wpi.first.wpilibj2.command.Commands;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
+import edu.wpi.first.wpilibj2.command.button.POVButton;
 import java.util.List;
+import edu.wpi.first.wpilibj2.command.Command;
 
 import frc.robot.subsystems.Intake;
+import frc.robot.commands.IntakeIn;
+import frc.robot.commands.IntakeOut;
+
 
 /*
  * This class is where the bulk of the robot should be declared.  Since Command-based is a
@@ -80,11 +89,15 @@ public class RobotContainer {
             () -> m_robotDrive.setX(),
             m_robotDrive));
 
-    m_operatorController.L1().whileTrue(m_robotIntakeIn)
-        .onFalse(m_robotIntakeStop);
+    m_operatorController
+        .L1()
+            .whileTrue((Command) new IntakeIn(IntakeIn.m_intakeIn));
             
-    m_operatorController.R1().whileTrue(m_robotIntakeOut)
-        .onFalse(m_robotIntakeStop);
+    m_operatorController
+        .R1()
+            .whileTrue((Command) new IntakeOut(IntakeOut.m_intakeOut))
+
+        ;
   }
     
 
